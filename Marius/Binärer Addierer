@@ -6,6 +6,11 @@ Write your code in this editor and press "Run" button to compile and execute it.
 
 *******************************************************************************/
 
+/*  Baisc binär Addierer zum besseren verständins über das Addieren von Zahlen.
+Später sollen noch negative ganz zahlen implementiert werden so wie dynamiche Bit anzahl, statt sstaticher 4.
+
+Initialisierung mit Zahlen die CA = 0 ergeben funktioniert es, ansonsten nicht -Marius 26.11.2019
+*/
 #include <stdio.h>
 
 int main()
