@@ -1,0 +1,22 @@
+/*
+Kleines Beispiel der scanf() problematik. Wenn bei der ersten eingabe aufforderung ein "falscher" string eingegeben wird, beispielhaft
+"Hallo Welt", dann wird der Buffer nur ungenügend von scanf() gelesen und gelert. Sommit bleibt ein rest übrig der beim zweiten scanf()
+gelert wird. Der benutzer kommt sommit niemals zur zweiten auffordern, statdessen wird nach der eingabe die beiden strings ausgegebn.
+string = "Hallo"    string2 = "Welt"
+Eine Lösung ist es nach jedem scanf() das CLEAR makro aufzurufen.
+*/
+#include <stdio.h>
+#define MAX 10
+#define CLEAR while(getchar() != '\n');
+int main(){
+    char string[MAX];
+    char string2[MAX];
+    printf("Erste eingabe !\n");
+    scanf("%s", string);
+    printf("zweite eingabe \n");
+    scanf("%s", string2);
+    printf("ende");
+    printf("erster string : %s \n", string);
+    printf("zweiter string : %s \n", string2);
+    return 0;
+}
