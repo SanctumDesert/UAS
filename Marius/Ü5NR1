@@ -1,0 +1,46 @@
+#include <stdio.h>
+/* AUFGABE: Der benutzter soll bis zu 30 zahlen eibgeben, diese sollen dan umgedreht ausgegeben werden, so wie das gröste und kleinst
+element der List*/
+#define MAX 30
+#define CLEAR while(getchar() != '\n');
+int main(){
+    int array[MAX];
+    int maximum;
+    int minimum;
+    char nochmal = 'n';
+    do{
+        printf("Bitte geben sie die Zahlen Folge ein ! \n");
+        for(int i = 0; i < MAX; i++){
+            int element;
+            scanf("%d", &element);
+            CLEAR
+            array[i] = element;
+        }
+        //find bigest smallest
+        maximum = array[0]; minimum = array[0];
+        for(int i = 0; i < MAX; i++){
+            if(array[i] > maximum){
+                maximum = array[i];
+            }
+            if(array[i] < minimum){
+                minimum = array[i];
+            }
+        }
+        
+        int resultArray[MAX];
+        //switch
+        for(int i = 0; i < MAX; i++){
+            resultArray[MAX -1 - i] = array[i];
+        }
+        
+        //array ausgeben
+        for(int i = 0; i < MAX; i++){
+            printf("%d ", resultArray[i]);
+        } printf("\n");
+        printf("Das kleinste element ist : %d das gröste %d \n", minimum, maximum);
+        printf("nochmal ? j = ja, n = nein \n");
+        scanf("%c", &nochmal);
+        CLEAR
+    }while(nochmal == 'j');
+    return 0;
+}
