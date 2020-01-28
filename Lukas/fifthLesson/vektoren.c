@@ -3,11 +3,11 @@
 
 int main(void){
     
-    const int vectorDimension = 3;
-    int vector1[vectorDimension], vector2[vectorDimension], sumVector[vectorDimension], validInput = 0;
+    const int vectorDimension = 20;
+    int vector1[vectorDimension], vector2[vectorDimension], sumVector[vectorDimension], scalVector[vectorDimension], validInput = 0;
     
-    //Vector 1.
-    printf("\nBitte geben Sie die Werte für den ersten Vektor an.\n");
+    //Input Vector 1.
+    printf("-----------Einlesen der Vektoren-----------\nBitte geben Sie die Werte für den ersten Vektor an.\n");
     for(int i = 0; i < vectorDimension; i++){
         while(validInput == 0){
             if(scanf("%d", &vector1[i])==1){
@@ -18,7 +18,7 @@ int main(void){
         validInput = 0;
     }
     
-    //Vector 2.
+    //Input Vector 2.
     printf("\nBitte geben Sie die Werte für den zweiten Vektor an.\n");
     for(int i = 0; i < vectorDimension; i++){
         while(validInput == 0){
@@ -87,4 +87,31 @@ int main(void){
             }
         }
     }
+    
+    //Calculating the scalar product.
+    printf("\nDas Skalaprodukt der beiden Vektoren:\n");
+    for(int i = 0; i < vectorDimension; i++){
+        scalVector[i] = vector1[i] * vector2[i];
+        if(vectorDimension==1){
+            printf("(%d)\n", scalVector[i]);
+        }
+        else{
+            if(i == 0){
+                printf("/ %d \\\n", scalVector[i]);
+            }
+            else if(i == vectorDimension-1){
+                printf("\\ %d /\n", scalVector[i]);
+            }
+            else{
+                printf("| %d |\n", scalVector[i]);
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
 }
