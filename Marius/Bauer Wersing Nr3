@@ -1,0 +1,58 @@
+#include <stdio.h>
+#define CLEAR while(getchar() != '\12');
+int main(){
+    unsigned int m1, cm1, mm1;
+    unsigned int m2, cm2, mm2;
+    unsigned summe = 0;
+    
+    char nochmal;
+    int r;
+    
+    printf("erste länge \n");
+    do{
+        printf("Meter \n");
+        r = scanf("%u", &m1);
+        CLEAR
+    }while(r != 1);
+    do{
+        printf("Zentimeter \n");
+        r = scanf("%u", &cm1);
+        CLEAR
+    }while(r != 1 || cm1 >= 100);
+    do{
+        printf("milimeter \n");
+        r = scanf("%u", &mm1);
+        CLEAR
+    }while(r != 1 || mm1 >= 10);
+    
+    printf("Zweite Länge \n");
+    do{
+        printf("Meter \n");
+        r = scanf("%u", &m2);
+        CLEAR
+    }while(r != 1);
+    do{
+        printf("Zentimeter \n");
+        r = scanf("%u", &cm2);
+        CLEAR
+    }while(r != 1 || cm2 >= 100);
+    do{
+        printf("milimeter \n");
+        r = scanf("%u", &mm2);
+        CLEAR
+    }while(r != 1 || mm2 >= 10);
+    
+    summe = m1 * 1000+ cm1 * 10 + mm1;
+    summe += m2 * 1000+ cm2 * 10 + mm2;
+    printf("summe %u \n",summe);
+    
+    int meter = (int)summe / 1000;
+    summe -= meter * 1000;
+    int zentimeter = (int)summe / 10;
+    summe -= zentimeter * 10;
+    int milimeter = summe;
+    printf("bzw %im, %icm, %imm \n", meter, zentimeter, milimeter);
+    
+    
+    return 0;
+}
