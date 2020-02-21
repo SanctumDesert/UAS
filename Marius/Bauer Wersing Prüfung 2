@@ -1,0 +1,42 @@
+// Lösung für Bauer wersing Nr2
+
+#include <stdio.h>
+#define CLEAR while(getchar() != '\12');
+int main(){
+    char zeichenKette[21];
+    int r;
+    char nochmal;
+    do{
+        do{
+            printf("Bitte zeichenKette eingeben \n");
+            r = scanf("%20s", zeichenKette);
+            CLEAR
+        }while(r != 1);
+        for(int i = 1; i < 20; i++){
+            if(zeichenKette[i-1] == 'a' && zeichenKette[i] == 'u'){
+                zeichenKette[i-1] = 'e';
+                zeichenKette[i] = 'i';
+            }
+            if(zeichenKette[i-1] == 'A' && zeichenKette[i] == 'u'){
+                zeichenKette[i-1] = 'E';
+                zeichenKette[i] = 'i';
+            }
+            if(zeichenKette[i-1] == 'a' && zeichenKette[i] == 'U'){
+                zeichenKette[i-1] = 'e';
+                zeichenKette[i] = 'L';
+            }
+            if(zeichenKette[i-1] == 'A' && zeichenKette[i] == 'U'){
+                zeichenKette[i-1] = 'E';
+                zeichenKette[i] = 'L';
+            }
+        }
+        //ausgeben
+        printf("%s \n", zeichenKette);
+        do{
+            printf("nochmal ? j/j=ja; n/N=nein \n");
+            r = scanf("%c", &nochmal);
+            CLEAR
+        }while(r != 1 || !(nochmal=='j' || nochmal=='J' || nochmal =='n' || nochmal=='N'));
+    }while(nochmal != 'n' && nochmal != 'N');
+    return 0;
+}
