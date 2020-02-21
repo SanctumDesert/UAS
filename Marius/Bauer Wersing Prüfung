@@ -1,0 +1,57 @@
+/* Lösung für Übungs aufgabe von frau bauer wersing, nr 1*/
+#include <stdio.h>
+#define CLEAR while(getchar() != '\12');
+int main(){
+    float z1, z2, z3;
+    int i;
+    char nochmal;
+    do{
+        do{
+            printf("Bitte gib die erste Zahl ein ! \n");
+            i = scanf("%f", &z1);
+            CLEAR
+        }while(i != 1);
+        
+        do{
+            printf("Bitte geben sie die zweite zahl ein ! \n");
+            i = scanf("%f", &z2);
+            CLEAR
+        }while(i != 1);
+        
+        do{
+            printf("Bitte geben sie die dritte zahl ein ! \n");
+            i = scanf("%f", &z3);
+            CLEAR
+        }while(i != 1);
+        
+        if(z1 == z2){
+            //min 1
+            if(z1 == z3){
+                printf("Sind alle gleich %.2f \n", z1);
+            }else{
+                printf("zwei zahlen sind gleich %.2f \n", z2);
+            }
+            
+        }else if(z2 == z3){
+            if(z3 == z1){
+                printf("Sind alle gleich %.2f \n", z1);
+            }else{
+                printf("zwei zahlen sind gleich %.2f \n", z3);
+            }
+        }else if(z1 == z3){
+            
+            if(z3 == z2){
+                 printf("Sind alle gleich %.2f \n", z1);
+            }else{
+                 printf("zwei zahlen sind gleich %.2f \n", z1);
+            }
+        }else{
+            printf("sind alle unterschiedlich ! \n");
+        }
+        do{
+            printf("Nochmal ? j/J=ja; n/N=nein \n");
+            i = scanf("%c", &nochmal);
+        }while(i != 1 || !(nochmal == 'j' ||nochmal == 'J' || nochmal == 'n' || nochmal == 'N'));
+    }while(nochmal != 'n' && nochmal != 'N');
+    return 0;
+}
