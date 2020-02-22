@@ -1,0 +1,55 @@
+#include <stdio.h>
+#define CLEAR while(getchar() != '\12');
+#define MAX 3
+
+void vektorAusgeben(int* vektor){
+    for(int i = 0; i < MAX; i++){
+        printf("%i Element: %i \n", i+1, vektor[i]);
+    }
+}
+int skalarProduktRechner(int* vektor1, int* vektor2){
+    int skalarProdukt = 0;
+    for(int i = 0; i < MAX; i++){
+        skalarProdukt += vektor1[i] * vektor2[i];
+    }
+    return skalarProdukt;
+}
+void vektorEinlesen(int* vektor){
+    int r;
+    for(int i = 0; i < MAX; i++){
+        do{
+            printf("Bitte gebe das %i Element ein \n", i+1);
+            r = scanf("%i", &vektor[i]);
+            CLEAR
+        }while(r != 1);
+    }
+}
+void summenVektor(int* vektor1, int* vektor2, int* endVektor){
+    for(int i = 0; i < MAX; i++){
+        endVektor[i] = vektor1[i] + vektor2[i];
+    }
+}
+int main(){
+    int vektor1[MAX];
+    int vektor2[MAX];
+    printf("Bitte geb den ersten vektor ein ! \n");
+    vektorEinlesen(vektor1);
+    printf("Bitte geben sie den zweiten Vektor ein ! \n");
+    vektorEinlesen(vektor2);
+    
+    printf("Erster Vektor : \n");
+    vektorAusgeben(vektor1);
+    printf("Zweiter Vektor : \n");
+    vektorAusgeben(vektor2);
+    
+    int skalarProdukt = skalarProduktRechner(vektor1, vektor2);
+    printf("Skalar Produkt %i \n",skalarProdukt);
+    
+    int sumVec[MAX];
+    summenVektor(vektor1, vektor2, sumVec);
+    printf("Der summen Vektor ! \n");
+    for(int i = 0; i < MAX; i++){
+        printf("%i ");
+    }
+    return 0;
+}
