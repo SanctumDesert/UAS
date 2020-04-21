@@ -1,0 +1,85 @@
+// Marius Illmann 21.04.2020
+/*
+Würfel simulator in C. Es wird ein Würfel simuliert dee bis zu 3 Zustände kennt. Ja, Nein, nochmal
+Bei ja und nein soll dies ausgegeben werden. Bei nochmal soll der Würfel erneut gewürfelt werden.
+*/
+
+/*
+Weil Random in C entweder beschiesen ist oder ich zu dumm bin kommt beim ergebnis "nochmal" lächerlich große zahlen beim rollen zustande
+da die random zahl stehts die gleiche ist
+*/
+
+#include <stdlib.h>
+#include <time.h>
+
+#define CLEAR while(getchar() != '\n');
+
+struct Dice{
+    int nein;
+    int ja;
+    int nochmal;
+};
+
+int rollCount = 0;
+char rollDice(struct Dice dice);
+int main(){
+    struct Dice dice;
+    int rolls = 1;
+    
+    int ja, nein, nochmal;
+    
+    int jaCounts = 0;
+    int neinCounts = 0;
+    
+    
+    printf("Willkommen zum Dice roll simulator ! \n Bitte geben sie die anzahl der nein an \n");
+    scanf("%d", &nein);
+    CLEAR
+    
+    printf("Nun die nochmal Seiten \n");
+    scanf("%d",&nochmal); 
+    CLEAR
+    
+    printf("Nun die anzahl der Ja seiten \n");
+    scanf("%d",&ja); 
+    CLEAR
+    
+    //printf("Wie oft soll gewürfelt werden? \n");
+    //scanf("%d",&rolls); 
+    
+    printf("Eingaben werden nicht geprüft es wird nun versucht mit einem 6 seitigen würfel %d zu würfeln \n", rolls);
+    dice.ja = ja; dice.nein = nein; dice.nochmal = nochmal;
+    for(int i = 0; i < rolls; i++){
+        char  result = rollDice(dice);
+        if(result == 'n'){
+            neinCounts++;        
+        }else if(result == 'j'){
+            jaCounts++;
+        }
+    }
+    printf("Es wurde %d gewürfelt und es kamm %d ja und %d nein raus", rollCount, jaCounts, neinCounts);
+}
+
+char rollDice(struct Dice dice){
+    rollCount++;
+    srand(time(NULL));
+    int randNumber = rand() % 6;
+    randNumber++;
+    printf("rand number %d \n", randNumber);
+    for(int i = 0; i <= dice.nein; i++){
+        if(randNumber == i){
+            return 'n';
+        }
+    }
+    for(int i = dice.nein; i <= dice.ja + dice.nein; i++){
+        if(randNumber == i){
+            return 'j';    
+        }
+    }
+    for(int i = dice.ja + dice.nein; i <= dice.nochmal + dice.ja + dice.nein; i++){
+        if(randNumber == i){
+            return rollDice(dice);    
+        }
+    }
+    return 'X'; //dafuq?
+}
