@@ -1,0 +1,22 @@
+
+#include <stdio.h>
+#define MAX 10
+#define CLEAR while(getchar() != '\12');
+
+int main(){
+    int eingabe[MAX];
+    printf("Bitte geben sie ein %d langes Array ein \n", MAX);
+    for(int i = 0; i < MAX; i++){
+        printf("bitte geben sie das %d element ein \n", i);
+        scanf("%d", &eingabe[i]);
+        CLEAR
+    }
+    int summe = 0;
+    for(int i = 0; i < MAX; i++){
+        summe += eingabe[i];
+    }
+    int mittelwert = summe / MAX;
+    printf("Summe ist : %d \n", summe);
+    printf("Der mittelwert ist %d ", mittelwert);
+    return 0;
+}
