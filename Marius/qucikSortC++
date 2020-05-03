@@ -1,0 +1,44 @@
+/*
+wurde in einer klasse geschrieben, daher sollte entweder die Methode in einer Klasse Namens Sorter mit einem statiche int arrayLenght
+stehen. Oder die Beiden malle, zeile 6 und 33 ersetzt werden mit einer globalen variable. Der rekusive aufruf funktioniert ebenfalls nicht ohne Klasse
+*/
+
+static int* quickSort(int* array, int length=Sorter::arrayLenght){
+		if(length == 1){
+			return array;
+		}
+		int* arrayk = (int*)malloc(length * sizeof(int));
+		int* arrayg = (int*)malloc(length * sizeof(int));
+		int pivot = length / 2;
+
+		int arrkIterator = 0;
+		int arrgIterator = 0;
+
+		for(int i = 0; i < length; i++){
+			if(*(array + pivot) != *(array + i)){
+				if(*(array + pivot) > *(array + i)){
+					*(arrayk + arrkIterator) = *(array + i);
+					arrkIterator++;
+				}else{
+					*(arrayg + arrgIterator) = *(array + i);
+					arrgIterator++;
+				}
+			}
+		}
+		if(arrkIterator != 0)
+		arrayk = Sorter::quickSort(arrayk, arrkIterator);
+		if(arrgIterator != 0)
+		arrayg = Sorter::quickSort(arrayg, arrgIterator);
+		//zussamen
+		int* resultArray = (int*)malloc(Sorter::arrayLenght * sizeof(int));
+		for(int i = 0; i < arrkIterator; i++){
+			*(resultArray + i) = *(arrayk + i);
+		}
+		*(resultArray + arrkIterator) = *(array + pivot);
+		arrkIterator++;
+		for(int i = 0; i < arrgIterator; i++){
+			*(resultArray + i + arrkIterator) = *(arrayg + i);
+		}
+
+		return resultArray;
+	}
