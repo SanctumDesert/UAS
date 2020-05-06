@@ -1,0 +1,136 @@
+
+#include <iostream>
+#include <cmath>
+#include <time.h>
+
+
+using namespace std;
+
+class Sorter{
+public:
+	static int arrayLenght;
+	static int printArray(int* array, int length = Sorter::arrayLenght, int maxOut = 20){
+		for(int i = 0; i < length; i++){
+			if(i == maxOut){
+				cout << "..." << endl;
+				return 0;
+			}
+			cout << " " << *(array + i);
+		}
+		cout << endl;
+	}
+	template <size_t arrayLenght>
+	static int* bubleSort(int (&array)[arrayLenght]){
+		int n = arrayLenght;
+		bool swapped = false;
+		do{
+			for(int i = 0; i < n-1; ++i){
+				if(array[i] > array[i+1]){
+					Sorter::swap(array[i], array[i+1]);
+					swapped = true;
+				}
+			}
+		n = n - 1;
+		}while(swapped);
+		return array;
+	}
+	//ich hab den pseudo code nicht ganz verstanden, das funktioniert aber auch
+	static int* quickSort(int* array, int length=Sorter::arrayLenght){
+		if(length == 1){
+			return array;
+		}
+		int* arrayk = (int*)malloc(length * sizeof(int));
+		int* arrayg = (int*)malloc(length * sizeof(int));
+		int pivot = length / 2;
+
+		int arrkIterator = 0;
+		int arrgIterator = 0;
+
+		for(int i = 0; i < length; i++){
+			if(*(array + pivot) != *(array + i)){
+				if(*(array + pivot) > *(array + i)){
+					*(arrayk + arrkIterator) = *(array + i);
+					arrkIterator++;
+				}else{
+					*(arrayg + arrgIterator) = *(array + i);
+					arrgIterator++;
+				}
+			}
+		}
+		if(arrkIterator != 0)
+		arrayk = Sorter::quickSort(arrayk, arrkIterator);
+		if(arrgIterator != 0)
+		arrayg = Sorter::quickSort(arrayg, arrgIterator);
+		//zussamen
+		int* resultArray = (int*)malloc(Sorter::arrayLenght * sizeof(int));
+		for(int i = 0; i < arrkIterator; i++){
+			*(resultArray + i) = *(arrayk + i);
+		}
+		*(resultArray + arrkIterator) = *(array + pivot);
+		arrkIterator++;
+		for(int i = 0; i < arrgIterator; i++){
+			*(resultArray + i + arrkIterator) = *(arrayg + i);
+		}
+
+		return resultArray;
+	}
+	//da mein buble sort aus dem pseudo code nicht ganz wollte, hab ich ihn nochmals anders geschrieben
+	static int* altBubleSort(int *array, int length = Sorter::arrayLenght){
+		for(int i = 0; i < length; i++){
+			for(int x = 0; x < length-1; x++){
+				if(array[x] > array[x + 1]){
+					Sorter::swap(array[x], array[x + 1]);
+				}
+			}
+		}
+		return array;
+	}
+	static int* quickSortTime(int* array, int length=Sorter::arrayLenght){
+		clock_t startTime = clock();
+		Sorter::quickSort(array, length);
+		clock_t endTime = clock();
+		cout << "Der Quick sort hat " << difftime(endTime, startTime) << " gedauert" << endl;
+	}
+	static int* buubleSortTime(int* array, int length = Sorter::arrayLenght){
+		clock_t startTime = clock();
+		Sorter::altBubleSort(array, length);
+		clock_t endTime = clock();
+		cout << "Der BUBLE sort hat " << difftime(endTime, startTime) << " gedauert" << endl;
+	}
+
+private:
+	static void swap(int &a, int &b){
+		int c = a;
+		a = b;
+		b = c;
+	}
+};
+int Sorter::arrayLenght = 0;
+
+//nicht wirklich random
+int* createRandomArray(int arrayLength){
+	int* array = (int*) calloc(arrayLength, sizeof(int));
+	for(int i = 0; i < arrayLength; i++){
+		*(array + i) = rand() % 100;
+	}
+	return array;
+}
+
+int main(){
+
+	int n;
+	cout << "Wie groß sollen die arrays jeweils sein ?" << endl;
+	cin >> n;
+
+	int* array1 = createRandomArray(n);
+	Sorter::printArray(array1, n);
+	int* array2 = createRandomArray(n);
+
+	Sorter::arrayLenght = n;
+	Sorter::printArray(Sorter::altBubleSort(array1));
+	Sorter::printArray(Sorter::quickSort(array1));
+	Sorter::quickSortTime(array1);
+	Sorter::buubleSortTime(array1);
+	return 0;
+}
+
