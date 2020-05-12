@@ -1,0 +1,37 @@
+
+template <size_t arrayLenght>
+int badFoo(int (&array)[arrayLenght]){
+	int x = 0; int y = 0; int z = 0;
+	for(int i = 0; i < arrayLenght; i++){
+		x = x + array[i];
+		y = 0;
+		for(int j = 0; j < arrayLenght; j++){
+			y = y + array[j];
+			z = 0;
+			for(int k = 0; k < arrayLenght; k++){
+				z = 3;
+			}
+		}
+		x = x + y;
+	}
+	return x + y + z;
+}
+
+template <size_t arrayLenght>
+int godFoo(int (&array)[arrayLenght]){
+	int x = 0; int y = 0; int z = 0;
+	for(int i = 0; i < arrayLenght; i++){
+		x = x + array[i];
+		z = 3;
+		y = y + array[i];
+	}
+	x = x + (y * arrayLenght);
+	return x + y + z;
+}
+
+int main(){
+	int array[3]; array[0] = 3; array[1] = 2; array[2] = 1;
+	cout << badFoo(array) << endl;
+	cout << godFoo(array) << endl;
+	return 0;
+}
