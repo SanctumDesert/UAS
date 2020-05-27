@@ -7,7 +7,7 @@ int partition(int a[], int p, int r){
 			//swap a[i] and a[y]
 			int c = a[y];
 			a[y] = a[i];
-			a[i] = a[y];
+			a[i] = c;
 		}
 	}
 	//swap a[i+1] and a[r]
