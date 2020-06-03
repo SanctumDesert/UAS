@@ -1,0 +1,72 @@
+#include <iostream>
+
+using namespace std;
+
+template <size_t arraLenght>
+void printArray(int (&a)[arraLenght]){
+	for(int i = 0; i < arraLenght; i++){
+		cout << a[i] << " ";
+	}
+	cout << endl;
+}
+
+template <size_t arraLenght>
+void heapify(int (&a)[arraLenght], int heapsize, int i){
+	int l = 2*i+1;
+	int r = 2*i+2;
+	int maximum;
+	if(l < heapsize && a[l] > a[i]){
+		maximum = l;
+	}else{
+		maximum = i;
+	}
+	if(r < heapsize && a[r] > a[maximum]){
+		maximum = r;
+	}
+	if(maximum != i){
+		int c = a[i];
+		a[i] = a[maximum];
+		a[maximum] = c;
+		heapify(a, heapsize, maximum);
+	}
+}
+template <size_t arraLenght>
+void buildHeap(int (&a)[arraLenght]){
+	for(int i = arraLenght/2; i > 0; i--){
+		heapify(a,arraLenght,i-1);
+	}
+}
+template <size_t arraLenght>
+void heapSort(int (&a)[arraLenght]){
+	buildHeap(a);
+	for(int i = arraLenght-1; i > 0; i--){
+		int c = a[0];
+		a[0] = a[i];
+		a[i] = c;
+		heapify(a,i,0);
+	}
+}
+
+template <size_t arraLenght>
+void drawHeap(int (&a)[arraLenght]){
+	int modulo = 2;
+	for(int i = 0; i < arraLenght; i++){
+		if((i+1) % modulo == 0){
+			cout << endl;
+			modulo *= 2;
+		}
+		cout << a[i] << "   ";
+	}
+}
+
+
+int main(){
+	int a[] = {1,4,2,53,65,7,4,81};
+	heapSort(a);
+	//buildHeap(a);
+	drawHeap(a);
+	cout << endl;
+	printArray(a);
+	return 0;
+}
+
